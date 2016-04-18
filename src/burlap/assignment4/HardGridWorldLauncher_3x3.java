@@ -13,24 +13,24 @@ import burlap.oomdp.singleagent.environment.SimulatedEnvironment;
 import burlap.oomdp.singleagent.explorer.VisualExplorer;
 import burlap.oomdp.visualizer.Visualizer;
 
-public class HardGridWorldLauncher {
+public class HardGridWorldLauncher_3x3 {
 	//These are some boolean variables that affect what will actually get executed
 	private static boolean visualizeInitialGridWorld = true; //Loads a GUI with the agent, walls, and goal
 	
 	//runValueIteration, runPolicyIteration, and runQLearning indicate which algorithms will run in the experiment
-	private static boolean runValueIteration = true; 
-	private static boolean runPolicyIteration = true;
+	private static boolean runValueIteration = false; 
+	private static boolean runPolicyIteration = false;
 	private static boolean runQLearning = true;
 	
 	//showValueIterationPolicyMap, showPolicyIterationPolicyMap, and showQLearningPolicyMap will open a GUI
 	//you can use to visualize the policy maps. Consider only having one variable set to true at a time
 	//since the pop-up window does not indicate what algorithm was used to generate the map.
-	private static boolean showValueIterationPolicyMap = true; 
+	private static boolean showValueIterationPolicyMap = false; 
 	private static boolean showPolicyIterationPolicyMap = false;
-	private static boolean showQLearningPolicyMap = false;
+	private static boolean showQLearningPolicyMap = true;
 	
-	private static Integer MAX_ITERATIONS = 100;
-	private static Integer NUM_INTERVALS = 100;
+	private static Integer MAX_ITERATIONS = 1000;
+	private static Integer NUM_INTERVALS = 1000;
 
 	protected static int[][] userMap = new int[][] { 
 										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -54,7 +54,7 @@ public class HardGridWorldLauncher {
 		int maxY = map[0].length-1;
 		// 
 
-		BasicGridWorld gen = new BasicGridWorld(map,maxX,maxY); //0 index map is 11X11
+		BasicGridWorld gen = new BasicGridWorld(map,maxX,maxY);
 		Domain domain = gen.generateDomain();
 
 		State initialState = BasicGridWorld.getExampleState(domain);
@@ -65,7 +65,7 @@ public class HardGridWorldLauncher {
 		SimulatedEnvironment env = new SimulatedEnvironment(domain, rf, tf,
 				initialState);
 		//Print the map that is being analyzed
-		System.out.println("/////Hard Grid World Analysis/////\n");
+		System.out.println("/////Hard Grid World 3x3 Analysis/////\n");
 		MapPrinter.printMap(MapPrinter.matrixToMap(map));
 		
 		if (visualizeInitialGridWorld) {

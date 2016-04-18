@@ -1,6 +1,9 @@
 package burlap.assignment4.util;
 
 import burlap.assignment4.BasicGridWorld;
+import burlap.behavior.policy.BoltzmannQPolicy;
+import burlap.behavior.policy.EpsilonGreedy;
+import burlap.behavior.policy.GreedyDeterministicQPolicy;
 import burlap.behavior.policy.Policy;
 import burlap.behavior.singleagent.EpisodeAnalysis;
 import burlap.behavior.singleagent.auxiliary.StateReachability;
@@ -59,7 +62,7 @@ public class AnalysisRunner {
 	
 			// run planning from our initial state
 			p = vi.planFromState(initialState);
-			AnalysisAggregator.addMillisecondsToFinishValueIteration((int) (System.nanoTime()-startTime)/1000000);
+			AnalysisAggregator.addMillisecondsToFinishValueIteration((System.nanoTime()-startTime)/1000000);
 
 			// evaluate the policy with one roll out visualize the trajectory
 			ea = p.evaluateBehavior(initialState, rf, tf);
@@ -73,7 +76,8 @@ public class AnalysisRunner {
 		MapPrinter.printPolicyMap(vi.getAllStates(), p, gen.getMap());
 		System.out.println("\n\n");
 		if(showPolicyMap){
-			simpleValueFunctionVis((ValueFunction)vi, p, initialState, domain, hashingFactory);
+			simpleValueFunctionVis((ValueFunction)vi, p, initialState, domain, hashingFactory,
+					"Value Iteration Outcome");
 		}
 	}
 
@@ -96,7 +100,7 @@ public class AnalysisRunner {
 	
 			// run planning from our initial state
 			p = pi.planFromState(initialState);
-			AnalysisAggregator.addMillisecondsToFinishPolicyIteration((int) (System.nanoTime()-startTime)/1000000);
+			AnalysisAggregator.addMillisecondsToFinishPolicyIteration((System.nanoTime()-startTime)/1000000);
 
 			// evaluate the policy with one roll out visualize the trajectory
 			ea = p.evaluateBehavior(initialState, rf, tf);
@@ -113,18 +117,19 @@ public class AnalysisRunner {
 
 		//visualize the value function and policy.
 		if(showPolicyMap){
-			simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory);
+			simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory, "Policy Iteration Outcome");
 		}
 	}
 
 	public void simpleValueFunctionVis(ValueFunction valueFunction, Policy p, 
-			State initialState, Domain domain, HashableStateFactory hashingFactory){
+			State initialState, Domain domain, HashableStateFactory hashingFactory,
+			String guiTitle){
 
 		List<State> allStates = StateReachability.getReachableStates(initialState,
 				(SADomain)domain, hashingFactory);
 		ValueFunctionVisualizerGUI gui = GridWorldDomain.getGridWorldValueFunctionVisualization(
 				allStates, valueFunction, p);
-		gui.initGUI();
+		gui.initGUI(guiTitle);
 
 	}
 	
@@ -146,6 +151,11 @@ public class AnalysisRunner {
 				hashingFactory,
 				0.99, 0.99);
 			
+			//Policy policy = new EpsilonGreedy(agent, 0.5);
+			//Policy policy = new GreedyDeterministicQPolicy(agent);
+			//Policy policy = new BoltzmannQPolicy(agent, 0.5);
+			//agent.setLearningPolicy(policy);
+			
 			for (int i = 0; i < numIterations; i++) {
 				ea = agent.runLearningEpisode(env);
 				env.resetEnvironment();
@@ -153,7 +163,7 @@ public class AnalysisRunner {
 			agent.initializeForPlanning(rf, tf, 1);
 			p = agent.planFromState(initialState);
 			AnalysisAggregator.addQLearningReward(calcRewardInEpisode(ea));
-			AnalysisAggregator.addMillisecondsToFinishQLearning((int) (System.nanoTime()-startTime)/1000000);
+			AnalysisAggregator.addMillisecondsToFinishQLearning((System.nanoTime()-startTime)/1000000);
 			AnalysisAggregator.addStepsToFinishQLearning(ea.numTimeSteps());
 
 		}
@@ -163,7 +173,8 @@ public class AnalysisRunner {
 
 		//visualize the value function and policy.
 		if(showPolicyMap){
-			simpleValueFunctionVis((ValueFunction)agent, p, initialState, domain, hashingFactory);
+			simpleValueFunctionVis((ValueFunction)agent, p, initialState, domain, hashingFactory,
+					"Q-Learning Outcome");
 		}
 
 	}

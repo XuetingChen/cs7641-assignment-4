@@ -11,9 +11,9 @@ public final class AnalysisAggregator {
 	private static List<Integer> stepsToFinishPolicyIteration = new ArrayList<Integer>();
 	private static List<Integer> stepsToFinishQLearning = new ArrayList<Integer>();
 	
-	private static List<Integer> millisecondsToFinishValueIteration = new ArrayList<Integer>();
-	private static List<Integer> millisecondsToFinishPolicyIteration = new ArrayList<Integer>();
-	private static List<Integer> millisecondsToFinishQLearning = new ArrayList<Integer>();
+	private static List<Long> millisecondsToFinishValueIteration = new ArrayList<Long>();
+	private static List<Long> millisecondsToFinishPolicyIteration = new ArrayList<Long>();
+	private static List<Long> millisecondsToFinishQLearning = new ArrayList<Long>();
 
 	private static List<Double> rewardsForValueIteration = new ArrayList<Double>();
 	private static List<Double> rewardsForPolicyIteration = new ArrayList<Double>();
@@ -45,13 +45,13 @@ public final class AnalysisAggregator {
 	}
 	
 
-	public static void addMillisecondsToFinishValueIteration(Integer millisecondsToFinishValueIteration1){
+	public static void addMillisecondsToFinishValueIteration(Long millisecondsToFinishValueIteration1){
 		millisecondsToFinishValueIteration.add(millisecondsToFinishValueIteration1);
 	}
-	public static void addMillisecondsToFinishPolicyIteration(Integer millisecondsToFinishPolicyIteration1){
+	public static void addMillisecondsToFinishPolicyIteration(Long millisecondsToFinishPolicyIteration1){
 		millisecondsToFinishPolicyIteration.add(millisecondsToFinishPolicyIteration1);
 	}
-	public static void addMillisecondsToFinishQLearning(Integer millisecondsToFinishQLearning1){
+	public static void addMillisecondsToFinishQLearning(Long millisecondsToFinishQLearning1){
 		millisecondsToFinishQLearning.add(millisecondsToFinishQLearning1);
 	}
 	public static void addValueIterationReward(double reward) {
@@ -65,16 +65,16 @@ public final class AnalysisAggregator {
 	}
 	public static void printValueIterationTimeResults(){
 		System.out.print("Value Iteration,");	
-		printList(millisecondsToFinishValueIteration);
+		printLongList(millisecondsToFinishValueIteration);
 	}
 	public static void printPolicyIterationTimeResults(){
 		System.out.print("Policy Iteration,");
-		printList(millisecondsToFinishPolicyIteration);
+		printLongList(millisecondsToFinishPolicyIteration);
 	}
 
 	public static void printQLearningTimeResults(){
 		System.out.print("Q Learning,");	
-		printList(millisecondsToFinishQLearning);
+		printLongList(millisecondsToFinishQLearning);
 	}
 
 	public static void printValueIterationRewards(){
@@ -99,6 +99,17 @@ public final class AnalysisAggregator {
 	private static void printList(List<Integer> valueList){
 		int counter = 0;
 		for(int value : valueList){
+			System.out.print(String.valueOf(value));
+			if(counter != valueList.size()-1){
+				System.out.print(",");
+			}
+			counter++;
+		}
+		System.out.println();
+	}
+	private static void printLongList(List<Long> valueList){
+		int counter = 0;
+		for(long value : valueList){
 			System.out.print(String.valueOf(value));
 			if(counter != valueList.size()-1){
 				System.out.print(",");

@@ -13,7 +13,7 @@ import burlap.oomdp.singleagent.environment.SimulatedEnvironment;
 import burlap.oomdp.singleagent.explorer.VisualExplorer;
 import burlap.oomdp.visualizer.Visualizer;
 
-public class EasyGridWorldLauncher {
+public class HardGridWorldLauncher_5x5 {
 	//These are some boolean variables that affect what will actually get executed
 	private static boolean visualizeInitialGridWorld = true; //Loads a GUI with the agent, walls, and goal
 	
@@ -33,12 +33,24 @@ public class EasyGridWorldLauncher {
 	private static Integer NUM_INTERVALS = 1000;
 
 	protected static int[][] userMap = new int[][] { 
-			{ 0, 0, 0, 0, 0},
-			{ 0, 0, 0, 0, 0},
-			{ 0, 0, 0, 0, 0},
-			{ 0, 0, 0, 0, 0},
-			{ 0, 0, 0, 0, 0}, };
-	
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+										{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},};
+
 //	private static Integer mapLen = map.length-1;
 
 	public static void main(String[] args) {
@@ -55,11 +67,11 @@ public class EasyGridWorldLauncher {
 
 		RewardFunction rf = new BasicRewardFunction(maxX,maxY); //Goal is at the top right grid
 		TerminalFunction tf = new BasicTerminalFunction(maxX,maxY); //Goal is at the top right grid
-
+		
 		SimulatedEnvironment env = new SimulatedEnvironment(domain, rf, tf,
 				initialState);
 		//Print the map that is being analyzed
-		System.out.println("/////Easy Grid World Analysis/////\n");
+		System.out.println("/////Hard Grid World 5x5 Analysis/////\n");
 		MapPrinter.printMap(MapPrinter.matrixToMap(map));
 		
 		if (visualizeInitialGridWorld) {

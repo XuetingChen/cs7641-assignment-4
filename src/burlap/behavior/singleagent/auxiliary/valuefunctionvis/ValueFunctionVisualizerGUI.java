@@ -219,11 +219,13 @@ public class ValueFunctionVisualizerGUI extends JFrame implements ItemListener {
 	/**
 	 * Initializes the GUI and presents it to the user.
 	 */
-	public void initGUI(){
+	public void initGUI(String guiTitle){
 		
 		this.visualizer.setPreferredSize(new Dimension(cWidth, cHeight));
 		
 		this.getContentPane().add(visualizer, BorderLayout.CENTER);
+		
+		this.setTitle(guiTitle);
 		
 		Container controlContainer = new Container();
 		controlContainer.setLayout(new BorderLayout());

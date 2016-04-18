@@ -194,7 +194,7 @@ public class BasicBehavior {
 
 		List<State> allStates = StateReachability.getReachableStates(initialState, (SADomain)domain, hashingFactory);
 		ValueFunctionVisualizerGUI gui = GridWorldDomain.getGridWorldValueFunctionVisualization(allStates, valueFunction, p);
-		gui.initGUI();
+		gui.initGUI("simpleValueFunctionVis");
 
 	}
 
@@ -236,7 +236,7 @@ public class BasicBehavior {
 		gui.setBgColor(Color.GRAY);
 
 		//start it
-		gui.initGUI();
+		gui.initGUI("manualValueFunctionVis");
 
 
 
