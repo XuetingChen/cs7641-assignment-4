@@ -1,3 +1,26 @@
+# MDPs and Reinforcement Learning
+
+This code runs two different Markov decision processes and one Q-learning analysis of various grid world problems for assignment 4 of CS-7641 at Georgia Tech.
+
+# Running the Code
+
+The code for this assignment is available from this Github repo: https://github.com/stormont/cs7641-assignment-4
+
+This code was based upon another public Github repo, available here: https://github.com/juanjose49/omscs-cs7641-machine-learning-assignment-4
+
+To run, load the project in Eclipse. Under the ./src/burlap/assignment4/ directory, find a number of files named XxxLauncher.java. Each of these are the main entry point to run a different grid problem:
+
+* EasyGridWorldLauncher.java: Runs an analysis of a simple 5x5 grid problem with one terminal state and no obstructions.
+* HardGridWorldLauncher_NxN.java: Various sizes of a harder grid problem with an square obstruction in the middle of the grid. Inside the square is empty, but inescapable. The N in the name refers to a subregion size; much like Sudoku has 9 regions of 3x3 size, this grid world has 9 regions of NxN size.
+
+Each problem (1 "easy" and 6 "hard" grids) will run 1000 iterations of value iteration, policy iteration, and Q-learning analysis, and will generate a heat-mapped image of the results (along with console output). The larger the grid size, the longer the code will take to run.
+
+Additional analysis was done using different Q-learning policies for comparison. These can be found commented out starting on line 154 of ./src/burlap/assignment4/util/AnalysisRunner.java. By default, an EpsilonGreedy policy is used with an epsilon value of 0.1.
+
+
+_(Original README follows)_
+
+
 #OMSCS: Machine Learning - Assignment 4
 
 
